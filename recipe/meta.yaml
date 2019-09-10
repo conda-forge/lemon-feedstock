@@ -18,7 +18,7 @@ source:
     - glpk_win.diff    # [win]
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -37,8 +37,8 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/include/lemon/glpk.h                 # [unix]
-    - test -f $PREFIX/lib/libemon.a                        # [unix]
+    - test -f $PREFIX/include/lemon/glpk.h                # [unix]
+    - test -f $PREFIX/lib/libemon.a                       # [unix]
     - if not exist %LIBRARY_INC%\\lemon\\glpk.h exit 1     # [win]
     - if not exist %LIBRARY_LIB%\\lemon.lib exit 1         # [win]
 
