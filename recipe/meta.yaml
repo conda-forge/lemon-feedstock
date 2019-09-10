@@ -7,7 +7,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ version  }}.tar.gz
   sha256: {{ sha256 }}
   patches:
@@ -19,6 +18,8 @@ source:
 
 build:
   number: 2
+  #graphviz pinning isn't available for windows at the moment
+  skip: True  # [win]
 
 requirements:
   build:
