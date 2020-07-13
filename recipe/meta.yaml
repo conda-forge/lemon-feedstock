@@ -8,7 +8,7 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ version  }}.tar.gz
+  url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
    # NOTE: this disables the installation of the glpk dlls
