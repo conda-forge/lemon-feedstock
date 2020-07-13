@@ -3,7 +3,7 @@ About lemon
 
 Home: https://lemon.cs.elte.hu/trac/lemon
 
-Package license: Boost-1.0
+Package license: BSL-1.0
 
 Feedstock license: BSD-3-Clause
 
