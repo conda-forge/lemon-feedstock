@@ -44,7 +44,7 @@ test:
 
 about:
   home: https://lemon.cs.elte.hu/trac/lemon
-  license: Boost-1.0
+  license: BSL-1.0
   license_file: LICENSE
   summary: 'Library for Efficient Modeling and Optimization in Networks'
 
