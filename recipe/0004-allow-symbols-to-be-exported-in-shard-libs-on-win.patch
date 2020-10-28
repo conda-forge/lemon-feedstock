@@ -1,0 +1,301 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 03e1cc7..c000c5b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -255,6 +255,11 @@ ELSE()
+ ENDIF()
+ 
+ ADD_SUBDIRECTORY(lemon)
++
++if (BUILD_SHARED_LIBS)
++  target_compile_definitions(lemon PRIVATE LEMON_EXPORTING)
++endif ()
++
+ IF(${CMAKE_SOURCE_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
+   ADD_SUBDIRECTORY(contrib)
+   ADD_SUBDIRECTORY(demo)
+diff --git a/lemon/CMakeLists.txt b/lemon/CMakeLists.txt
+index 4e6567e..dec0513 100644
+--- a/lemon/CMakeLists.txt
++++ b/lemon/CMakeLists.txt
+@@ -68,6 +68,7 @@ INSTALL(
+   TARGETS lemon
+   ARCHIVE DESTINATION lib
+   LIBRARY DESTINATION lib
++  RUNTIME DESTINATION bin
+   COMPONENT library
+ )
+ 
+diff --git a/lemon/color.h b/lemon/color.h
+index 0235791..75a9a06 100644
+--- a/lemon/color.h
++++ b/lemon/color.h
+@@ -22,7 +22,7 @@
+ #include<vector>
+ #include<lemon/math.h>
+ #include<lemon/maps.h>
+-
++#include<lemon/export_config.h>
+ 
+ ///\ingroup misc
+ ///\file
+@@ -62,35 +62,35 @@ namespace lemon {
+   };
+ 
+   /// White color constant
+-  extern const Color WHITE;
++  extern const LEMON_EXPORT Color WHITE;
+   /// Black color constant
+-  extern const Color BLACK;
++  extern const LEMON_EXPORT Color BLACK;
+   /// Red color constant
+-  extern const Color RED;
++  extern const LEMON_EXPORT Color RED;
+   /// Green color constant
+-  extern const Color GREEN;
++  extern const LEMON_EXPORT Color GREEN;
+   /// Blue color constant
+-  extern const Color BLUE;
++  extern const LEMON_EXPORT Color BLUE;
+   /// Yellow color constant
+-  extern const Color YELLOW;
++  extern const LEMON_EXPORT Color YELLOW;
+   /// Magenta color constant
+-  extern const Color MAGENTA;
++  extern const LEMON_EXPORT Color MAGENTA;
+   /// Cyan color constant
+-  extern const Color CYAN;
++  extern const LEMON_EXPORT Color CYAN;
+   /// Grey color constant
+-  extern const Color GREY;
++  extern const LEMON_EXPORT Color GREY;
+   /// Dark red color constant
+-  extern const Color DARK_RED;
++  extern const LEMON_EXPORT Color DARK_RED;
+   /// Dark green color constant
+-  extern const Color DARK_GREEN;
++  extern const LEMON_EXPORT Color DARK_GREEN;
+   /// Drak blue color constant
+-  extern const Color DARK_BLUE;
++  extern const LEMON_EXPORT Color DARK_BLUE;
+   /// Dark yellow color constant
+-  extern const Color DARK_YELLOW;
++  extern const LEMON_EXPORT Color DARK_YELLOW;
+   /// Dark magenta color constant
+-  extern const Color DARK_MAGENTA;
++  extern const LEMON_EXPORT Color DARK_MAGENTA;
+   /// Dark cyan color constant
+-  extern const Color DARK_CYAN;
++  extern const LEMON_EXPORT Color DARK_CYAN;
+ 
+   ///Map <tt>int</tt>s to different <tt>Color</tt>s
+ 
+diff --git a/lemon/core.h b/lemon/core.h
+index 507943d..2e66366 100644
+--- a/lemon/core.h
++++ b/lemon/core.h
+@@ -26,6 +26,7 @@
+ #include <lemon/bits/enable_if.h>
+ #include <lemon/bits/traits.h>
+ #include <lemon/assert.h>
++#include <lemon/export_config.h>
+ 
+ // Disable the following warnings when compiling with MSVC:
+ // C4250: 'class1' : inherits 'class2::member' via dominance
+@@ -75,7 +76,7 @@ namespace lemon {
+ #ifdef LEMON_ONLY_TEMPLATES
+   const Invalid INVALID = Invalid();
+ #else
+-  extern const Invalid INVALID;
++  extern const LEMON_EXPORT Invalid INVALID;
+ #endif
+ 
+   /// \addtogroup gutils
+diff --git a/lemon/export_config.h b/lemon/export_config.h
+new file mode 100644
+index 0000000..d0b0885
+--- /dev/null
++++ b/lemon/export_config.h
+@@ -0,0 +1,18 @@
++#ifndef LEMON_EXPORT_CONFIG_H
++    #define LEMON_EXPORT_CONFIG_H
++
++    #ifdef _WIN32
++        #ifdef LEMON_EXPORTING
++            #define LEMON_EXPORT __declspec(dllexport)
++        #else
++            #define LEMON_EXPORT __declspec(dllimport)
++        #endif
++    #else
++        #ifndef LEMON_EXPORT
++            #define LEMON_EXPORT
++        #endif
++    #endif // _WIN32
++
++
++
++#endif // LEMON_EXPORT_CONFIG_H
+diff --git a/lemon/random.h b/lemon/random.h
+index 8de74ed..981b24a 100644
+--- a/lemon/random.h
++++ b/lemon/random.h
+@@ -80,6 +80,8 @@
+ #include <lemon/bits/windows.h>
+ #endif
+ 
++#include <lemon/export_config.h>
++
+ ///\ingroup misc
+ ///\file
+ ///\brief Mersenne Twister random number generator
+@@ -998,7 +1000,7 @@ namespace lemon {
+   };
+ 
+ 
+-  extern Random rnd;
++  extern LEMON_EXPORT Random rnd;
+ 
+ }
+ 
+diff --git a/lemon/time_measure.h b/lemon/time_measure.h
+index 3f7f077..9033258 100644
+--- a/lemon/time_measure.h
++++ b/lemon/time_measure.h
+@@ -35,6 +35,7 @@
+ #include <fstream>
+ #include <iostream>
+ #include <lemon/math.h>
++#include <lemon/export_config.h>
+ 
+ namespace lemon {
+ 
+@@ -56,7 +57,7 @@ namespace lemon {
+   /// In most cases, perhaps the \ref Timer or the \ref TimeReport
+   /// class is what you want to use instead.
+ 
+-  class TimeStamp
++  class LEMON_EXPORT TimeStamp
+   {
+     double utime;
+     double stime;
+diff --git a/lemon/tolerance.h b/lemon/tolerance.h
+index 36a7512..b69f129 100644
+--- a/lemon/tolerance.h
++++ b/lemon/tolerance.h
+@@ -19,6 +19,7 @@
+ #ifndef LEMON_TOLERANCE_H
+ #define LEMON_TOLERANCE_H
+ 
++#include <lemon/export_config.h>
+ ///\ingroup misc
+ ///\file
+ ///\brief A basic tool to handle the anomalies of calculation with
+@@ -48,7 +49,7 @@ namespace lemon {
+   ///\sa Tolerance<long double>
+ 
+   template<class T>
+-  class Tolerance
++  class LEMON_EXPORT Tolerance
+   {
+   public:
+     typedef T Value;
+@@ -88,7 +89,7 @@ namespace lemon {
+   ///\sa Tolerance
+   ///\relates Tolerance
+   template<>
+-  class Tolerance<float>
++  class LEMON_EXPORT Tolerance<float>
+   {
+     static float def_epsilon;
+     float _epsilon;
+@@ -139,7 +140,7 @@ namespace lemon {
+   ///\sa Tolerance
+   ///\relates Tolerance
+   template<>
+-  class Tolerance<double>
++  class LEMON_EXPORT Tolerance<double>
+   {
+     static double def_epsilon;
+     double _epsilon;
+@@ -190,7 +191,7 @@ namespace lemon {
+   ///\sa Tolerance
+   ///\relates Tolerance
+   template<>
+-  class Tolerance<long double>
++  class LEMON_EXPORT Tolerance<long double>
+   {
+     static long double def_epsilon;
+     long double _epsilon;
+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+index 96fc5dd..e39fb03 100644
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -90,6 +90,12 @@ IF(LEMON_HAVE_LP)
+       COMMAND ${CMAKE_COMMAND} -E copy ${GLPK_BIN_DIR}/libltdl3.dll ${TARGET_PATH}
+       COMMAND ${CMAKE_COMMAND} -E copy ${GLPK_BIN_DIR}/zlib1.dll ${TARGET_PATH}
+     )
++    IF(BUILD_SHARED_LIBS)
++      add_custom_command ( TARGET lp_test POST_BUILD
++          COMMAND ${CMAKE_COMMAND} -E copy_if_different
++          $<TARGET_FILE:lemon> $<TARGET_FILE_DIR:lp_test>
++      )
++    ENDIF()
+   ENDIF()
+ 
+   IF(WIN32 AND LEMON_HAVE_CPLEX)
+@@ -98,6 +104,12 @@ IF(LEMON_HAVE_LP)
+     ADD_CUSTOM_COMMAND(TARGET lp_test POST_BUILD
+       COMMAND ${CMAKE_COMMAND} -E copy ${ILOG_CPLEX_DLL} ${TARGET_PATH}
+     )
++    IF(BUILD_SHARED_LIBS)
++      add_custom_command ( TARGET lp_test POST_BUILD
++          COMMAND ${CMAKE_COMMAND} -E copy_if_different
++          $<TARGET_FILE:lemon> $<TARGET_FILE_DIR:lp_test>
++      )
++    ENDIF()
+   ENDIF()
+ ENDIF()
+ 
+@@ -132,6 +144,12 @@ IF(LEMON_HAVE_MIP)
+       COMMAND ${CMAKE_COMMAND} -E copy ${GLPK_BIN_DIR}/libltdl3.dll ${TARGET_PATH}
+       COMMAND ${CMAKE_COMMAND} -E copy ${GLPK_BIN_DIR}/zlib1.dll ${TARGET_PATH}
+     )
++    IF(BUILD_SHARED_LIBS)
++      add_custom_command ( TARGET mip_test POST_BUILD
++          COMMAND ${CMAKE_COMMAND} -E copy_if_different
++          $<TARGET_FILE:lemon> $<TARGET_FILE_DIR:mip_test>
++      )
++    ENDIF()
+   ENDIF()
+ 
+   IF(WIN32 AND LEMON_HAVE_CPLEX)
+@@ -140,6 +158,12 @@ IF(LEMON_HAVE_MIP)
+     ADD_CUSTOM_COMMAND(TARGET mip_test POST_BUILD
+       COMMAND ${CMAKE_COMMAND} -E copy ${ILOG_CPLEX_DLL} ${TARGET_PATH}
+     )
++    IF(BUILD_SHARED_LIBS)
++      add_custom_command ( TARGET mip_test POST_BUILD
++          COMMAND ${CMAKE_COMMAND} -E copy_if_different
++          $<TARGET_FILE:lemon> $<TARGET_FILE_DIR:mip_test>
++      )
++    ENDIF()
+   ENDIF()
+ ENDIF()
+ 
+@@ -158,4 +182,13 @@ FOREACH(TEST_NAME ${TESTS})
+       ADD_TEST(${TEST_NAME} ${TEST_NAME})
+     ENDIF()
+   ADD_DEPENDENCIES(check ${TEST_NAME})
++  IF(WIN32)
++    IF(BUILD_SHARED_LIBS)
++      add_custom_command ( TARGET ${TEST_NAME} POST_BUILD
++          COMMAND ${CMAKE_COMMAND} -E copy_if_different
++          $<TARGET_FILE:lemon> $<TARGET_FILE_DIR:${TEST_NAME}>
++      )
++    ENDIF()
++  ENDIF()
++
+ ENDFOREACH()
+-- 
+2.25.1
+
