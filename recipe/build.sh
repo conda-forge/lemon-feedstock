@@ -17,3 +17,4 @@ make error_test bfs_test
 ./test/bfs_test
 
 make install
+ls -lah ${PREFIX}/share/doc/lemon
