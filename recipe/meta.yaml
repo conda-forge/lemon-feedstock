@@ -33,13 +33,14 @@ source:
     - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch  # [win]
 
 build:
-  number: 3
+  number: 4
   run_exports:
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}
 
 requirements:
   build:
     - cmake
+    - make
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
