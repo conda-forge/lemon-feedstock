@@ -1,5 +1,7 @@
 CMAKE_GENERATOR:
 - NMake Makefiles
+bzip2:
+- '1'
 c_compiler:
 - vs2017
 channel_sources:
@@ -13,6 +15,8 @@ glpk:
 graphviz:
 - '2.47'
 pin_run_as_build:
+  bzip2:
+    max_pin: x
   glpk:
     max_pin: x.x
   graphviz:
