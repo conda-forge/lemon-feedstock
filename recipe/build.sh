@@ -10,7 +10,7 @@ cmake ${CMAKE_ARGS} \
     ..
 make
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+if [[ "${target_platform}" == "${build_platform}" ]]; then
   # Compile and run a few tests.
   make error_test bfs_test
   ./test/error_test
