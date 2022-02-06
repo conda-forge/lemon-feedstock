@@ -10,9 +10,11 @@ cmake ${CMAKE_ARGS} \
     ..
 make
 
-# Compile and run a few tests.
-make error_test bfs_test
-./test/error_test
-./test/bfs_test
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+  # Compile and run a few tests.
+  make error_test bfs_test
+  ./test/error_test
+  ./test/bfs_test
+fi
 
 make install
