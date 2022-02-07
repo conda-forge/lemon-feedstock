@@ -1,9 +1,11 @@
 CMAKE_GENERATOR:
 - NMake Makefiles
+bzip2:
+- '1'
 c_compiler:
 - vs2017
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -11,8 +13,10 @@ cxx_compiler:
 glpk:
 - '4.65'
 graphviz:
-- '2.38'
+- '2.47'
 pin_run_as_build:
+  bzip2:
+    max_pin: x
   glpk:
     max_pin: x.x
   graphviz:
