@@ -31,7 +31,7 @@ source:
     - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch  # [win]
 
 build:
-  number: 5
+  number: 6
   run_exports:
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}
 
