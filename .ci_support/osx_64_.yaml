@@ -19,14 +19,10 @@ cxx_compiler_version:
 glpk:
 - '5.0'
 graphviz:
-- '5'
+- '7'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pin_run_as_build:
-  bzip2:
-    max_pin: x
-  glpk:
-    max_pin: x.x
   graphviz:
     max_pin: x
 target_platform:
