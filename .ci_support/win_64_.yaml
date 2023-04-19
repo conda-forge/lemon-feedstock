@@ -13,7 +13,7 @@ cxx_compiler:
 glpk:
 - '5.0'
 graphviz:
-- '7'
+- '8'
 pin_run_as_build:
   graphviz:
     max_pin: x
