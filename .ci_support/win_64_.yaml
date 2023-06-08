@@ -1,5 +1,3 @@
-CMAKE_GENERATOR:
-- NMake Makefiles
 bzip2:
 - '1'
 c_compiler:
@@ -13,7 +11,7 @@ cxx_compiler:
 glpk:
 - '5.0'
 graphviz:
-- '7'
+- '8'
 pin_run_as_build:
   graphviz:
     max_pin: x
