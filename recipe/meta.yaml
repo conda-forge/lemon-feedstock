@@ -29,9 +29,11 @@ source:
     - 0003-LEMONConfig.cmake.patch
    # export symbols for shared lib on windows
     - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch  # [win]
+    # C++17 does not allow 'register'
+    - 0005-Remove-the-use-of-the-register-keyword.patch
 
 build:
-  number: 7
+  number: 8
   run_exports:
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}
 
