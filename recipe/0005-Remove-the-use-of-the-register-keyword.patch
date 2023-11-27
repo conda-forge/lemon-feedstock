@@ -1,0 +1,27 @@
+From fdbac6f23599765e81f15cb31486377294cc2095 Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Mon, 27 Nov 2023 07:04:57 -0500
+Subject: [PATCH] Remove the use of the register keyword
+
+---
+ lemon/random.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lemon/random.h b/lemon/random.h
+index 8de74ed..f9861f3 100644
+--- a/lemon/random.h
++++ b/lemon/random.h
+@@ -249,8 +249,8 @@ namespace lemon {
+ 
+         current = state + length;
+ 
+-        register Word *curr = state + length - 1;
+-        register long num;
++        Word *curr = state + length - 1;
++        long num;
+ 
+         num = length - shift;
+         while (num--) {
+-- 
+2.40.1
+
