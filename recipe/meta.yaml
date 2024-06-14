@@ -33,7 +33,7 @@ source:
     - 0005-Remove-the-use-of-the-register-keyword.patch
 
 build:
-  number: 8
+  number: 9
   run_exports:
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}
 
@@ -43,6 +43,7 @@ requirements:
     - make
     - doxygen
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - glpk
