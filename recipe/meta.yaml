@@ -6,7 +6,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/k-dominik/lemon/archive/{{ version }}.tar.gz 
   sha256: e3d7a204a6fdbde8fe87dbc1aa3fd0ae58f908e9fbe8db8a6618db7cd44cdce6
   patches:
@@ -43,7 +42,7 @@ requirements:
     - make
     - doxygen
     - {{ compiler('c') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
   host:
     - glpk
@@ -51,9 +50,6 @@ requirements:
     - graphviz
     - bzip2
     - ghostscript   # [unix]
-  run:
-    - glpk
-    - coincbc       # [unix]
 
 test:
   commands:
@@ -76,3 +72,4 @@ extra:
     - bluescarni
     - stuarteberg
     - k-dominik
+    - hmaarrfk
