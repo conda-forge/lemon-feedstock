@@ -6,7 +6,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/k-dominik/lemon/archive/{{ version }}.tar.gz 
   sha256: e3d7a204a6fdbde8fe87dbc1aa3fd0ae58f908e9fbe8db8a6618db7cd44cdce6
   patches:
@@ -33,7 +32,7 @@ source:
     - 0005-Remove-the-use-of-the-register-keyword.patch
 
 build:
-  number: 8
+  number: 9
   run_exports:
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}
 
@@ -43,6 +42,7 @@ requirements:
     - make
     - doxygen
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
   host:
     - glpk
@@ -50,9 +50,6 @@ requirements:
     - graphviz
     - bzip2
     - ghostscript   # [unix]
-  run:
-    - glpk
-    - coincbc       # [unix]
 
 test:
   commands:
@@ -75,3 +72,4 @@ extra:
     - bluescarni
     - stuarteberg
     - k-dominik
+    - hmaarrfk
