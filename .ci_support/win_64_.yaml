@@ -12,7 +12,5 @@ cxx_compiler:
 - vs2019
 glpk:
 - '5.0'
-graphviz:
-- '12'
 target_platform:
 - win-64
