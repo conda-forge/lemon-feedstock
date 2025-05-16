@@ -37,7 +37,8 @@ build:
 
 requirements:
   build:
-    - cmake
+    # Requires CMP0048 OLD which is no longer supported by cmake 4
+    - cmake <4
     - make
     - doxygen
     - {{ compiler('c') }}
