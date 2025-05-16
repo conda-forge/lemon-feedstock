@@ -14,3 +14,5 @@ glpk:
 - '5.0'
 target_platform:
 - win-64
+zlib:
+- '1'
