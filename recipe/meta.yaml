@@ -47,6 +47,7 @@ requirements:
   host:
     - glpk
     - coin-or-cbc   # [unix]
+    - zlib
     - bzip2
     - ghostscript   # [unix]
 
