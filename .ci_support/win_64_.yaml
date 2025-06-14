@@ -13,6 +13,6 @@ cxx_compiler:
 glpk:
 - '5.0'
 graphviz:
-- '12'
+- '13'
 target_platform:
 - win-64
