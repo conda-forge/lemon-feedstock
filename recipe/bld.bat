@@ -4,6 +4,7 @@ cd build
 set CONFIGURATION="Release"
 
 cmake ^
+    %CMAKE_ARGS% ^
     -G "%CMAKE_GENERATOR%" ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
