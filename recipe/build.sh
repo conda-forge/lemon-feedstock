@@ -7,6 +7,7 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_POSITION_INDEPENDENT_CODE=1 \
     -DBUILD_SHARED_LIBS=1 \
+    -DLEMON_DOC_SOURCE_BROWSER=0 \
     ..
 make
 
@@ -18,3 +19,4 @@ if [[ "${target_platform}" == "${build_platform}" ]]; then
 fi
 
 make install
+ls -lah ${PREFIX}/share/doc/lemon
